@@ -1,1 +1,1 @@
-# Audio Visualier for Smart Assistant
+# Core of Smart Assistant

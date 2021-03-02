@@ -1,0 +1,17 @@
+{
+  "name": "smartassistant.voxell.core",
+  "displayName": "SA Core",
+  "author": "Nixon",
+  "description": "Core of Smart Assistant",
+  "keywords": [
+    "core",
+    "smart assistant"
+  ],
+  "license": "GPL v3.0",
+  "unity": "2020.2",
+  "unityRelease": "0f1",
+  "version": "0.1.0",
+  "dependencies": {
+    "smartassistant.voxell.audiovisualizer": "0.1.1"
+  }
+}

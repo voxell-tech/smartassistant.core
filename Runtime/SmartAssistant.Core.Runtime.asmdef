@@ -1,3 +1,16 @@
 {
-	"name": "SmartAssistant.Core.Runtime"
+    "name": "SmartAssistant.Core.Runtime",
+    "rootNamespace": "",
+    "references": [
+        "GUID:a0a31be11065b7d409dc053481875361"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
 }

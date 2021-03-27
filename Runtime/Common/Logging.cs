@@ -45,7 +45,7 @@ namespace SmartAssistant
       this.debugLevel = debugLevel;
     }
 
-    public void CustomLog(object message, LogImportance importance, LogStyle logStyle)
+    public void ConditionalLog(object message, LogImportance importance, LogStyle logStyle)
     {
       if (importance >= debugLevel)
       {

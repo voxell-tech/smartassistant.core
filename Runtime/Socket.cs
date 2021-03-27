@@ -35,19 +35,18 @@ namespace SmartAssistant.Core
     public string ipAddress = "localhost";
     public int port = 8052;
     public LogImportance debugLevel;
+
+    public readonly int headerSize = 10;
     private Logging logging;
     #endregion
 
     #region TCP Connections
-    // Background thread for TcpServer workload. 
     public static Thread tcpListenerThread;
-    // TCPListener to listen for incomming TCP connection requests.
     public static TcpListener tcpListener;
-    // Create handle to connected tcp client.
     public static TcpClient connectedTcpClient;
     #endregion
 
-    #region Socket Events Handler
+    #region Socket Tasks
     public static readonly int maxTaskType = 3;
     public static Action[] socketActions;
     public static Action<string>[] socketInputActions;
@@ -62,8 +61,6 @@ namespace SmartAssistant.Core
       tcpListenerThread.Start();
 
       logging = new Logging(debugLevel);
-
-      print(socketActions.Length);
     }
 
     void OnDisable()
@@ -86,7 +83,7 @@ namespace SmartAssistant.Core
         // Create listener on localhost port 8052. 
         tcpListener = new TcpListener(IPAddress.Parse(ipAddress), 8052);
         tcpListener.Start();
-        logging.CustomLog("Server is listening", LogImportance.Important, LogStyle.Log);
+        logging.ConditionalLog("Server is listening", LogImportance.Important, LogStyle.Log);
         Byte[] bytes = new Byte[1024];
         while (true)
         {
@@ -103,13 +100,18 @@ namespace SmartAssistant.Core
                 Array.Copy(bytes, 0, incommingData, 0, length);
                 string clientSocketMessage = Encoding.UTF8.GetString(incommingData);
                 SocketMessage socketMessage = JsonConvert.DeserializeObject<SocketMessage>(clientSocketMessage);
-                logging.CustomLog(
+                logging.ConditionalLog(
                   $"task received from client\nTask: {socketMessage.task}, Argument: {socketMessage.argument}",
                   LogImportance.Normal, LogStyle.Log
                 );
 
                 string methodOutput;
                 ExecuteSocketTask(socketMessage, out methodOutput);
+
+                if (methodOutput != null)
+                {
+                  // TODO: send message back to python
+                }
               }
             }
           }
@@ -117,7 +119,7 @@ namespace SmartAssistant.Core
       }
       catch (SocketException socketException)
       {
-        logging.CustomLog(
+        logging.ConditionalLog(
           "SocketException " + socketException.ToString(),
           LogImportance.Crucial, LogStyle.Warning
         );
@@ -143,41 +145,44 @@ namespace SmartAssistant.Core
           byte[] serverSocketMessageAsByteArray = Encoding.ASCII.GetBytes(serverSocketMessage);
           // Write byte array to socketConnection stream.
           stream.Write(serverSocketMessageAsByteArray, 0, serverSocketMessageAsByteArray.Length);
-          logging.CustomLog(
+          logging.ConditionalLog(
             "Server sent his SocketMessage - should be received by client",
             LogImportance.Normal, LogStyle.Log);
         }
       }
       catch (SocketException socketException)
       {
-        logging.CustomLog(
+        logging.ConditionalLog(
           "SocketException " + socketException.ToString(),
           LogImportance.Crucial, LogStyle.Warning
         );
       }
     }
 
+    #region Socket Message Execution
+    /// <summary>
+    /// Executes task based on socket message
+    /// </summary>
+    /// <param name="socketMessage">socket message</param>
+    /// <param name="methodOutput">output of the task carried</param>
     private void ExecuteSocketTask(SocketMessage socketMessage, out string methodOutput)
     {
-      methodOutput = "";
+      methodOutput = null;
       // bunch of returns to avoid errors
       if (socketMessage.taskType > maxTaskType)
       {
-        logging.CustomLog(
+        logging.ConditionalLog(
           $"taskType recieved from client: {socketMessage.taskType} exceeds the number of task types: {maxTaskType}",
           LogImportance.Critical, LogStyle.Error);
         return;
       }
 
-      if (socketMessage.taskType > 0)
+      if (socketMessage.taskType > 0 && socketMessage.argument == null)
       {
-        if (socketMessage.argument == null)
-        {
-          logging.CustomLog(
-            $"argument recieved from client is null but is required for taskType: {socketMessage.taskType}",
-            LogImportance.Critical, LogStyle.Error);
-          return;
-        }
+        logging.ConditionalLog(
+          $"argument recieved from client is null but is required for taskType: {socketMessage.taskType}",
+          LogImportance.Critical, LogStyle.Error);
+        return;
       }
 
       switch(socketMessage.taskType)
@@ -199,16 +204,23 @@ namespace SmartAssistant.Core
       }
     }
 
+    /// <summary>
+    /// Checks if task index is within range of maximum task available
+    /// </summary>
+    /// <param name="task">task index called</param>
+    /// <param name="maxTask">maximum number of task available</param>
+    /// <returns>Returns true if task index is not more than the available number of task else false</returns>
     private bool CheckTaskViability(in int task, in int maxTask)
     {
       if (task > maxTask)
       {
-        logging.CustomLog(
+        logging.ConditionalLog(
         $"task recieved from client: {task} exceeds the number of tasks: {maxTask}",
         LogImportance.Critical, LogStyle.Error);
         return false;
       }
       return true;
     }
+    #endregion
   }
 }

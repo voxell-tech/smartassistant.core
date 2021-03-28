@@ -21,7 +21,7 @@ using System.IO;
 using UnityEngine;
 using UnityEngine.Networking;
 
-namespace SmartAssistant
+namespace SmartAssistant.Speech
 {
   public static class FileUtil
   {

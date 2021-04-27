@@ -30,7 +30,7 @@ namespace SmartAssistant
 
   public enum LogImportance
   {
-    Normal,
+    Info,
     Important,
     Crucial,
     Critical

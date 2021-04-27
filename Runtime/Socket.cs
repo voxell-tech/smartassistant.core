@@ -37,7 +37,7 @@ namespace SmartAssistant.Core
     public LogImportance debugLevel;
 
     public readonly int headerSize = 10;
-    private Logging logging;
+    private Logging logger;
     #endregion
 
     #region TCP Connections
@@ -60,7 +60,7 @@ namespace SmartAssistant.Core
       tcpListenerThread.IsBackground = true;
       tcpListenerThread.Start();
 
-      logging = new Logging(debugLevel);
+      logger = new Logging(debugLevel);
     }
 
     void OnDisable()
@@ -83,7 +83,7 @@ namespace SmartAssistant.Core
         // Create listener on localhost port 8052. 
         tcpListener = new TcpListener(IPAddress.Parse(ipAddress), 8052);
         tcpListener.Start();
-        logging.ConditionalLog("Server is listening", LogImportance.Important, LogStyle.Log);
+        logger.ConditionalLog("Server is listening", LogImportance.Important, LogStyle.Log);
         Byte[] bytes = new Byte[1024];
         while (true)
         {
@@ -100,9 +100,9 @@ namespace SmartAssistant.Core
                 Array.Copy(bytes, 0, incommingData, 0, length);
                 string clientSocketMessage = Encoding.UTF8.GetString(incommingData);
                 SocketMessage socketMessage = JsonConvert.DeserializeObject<SocketMessage>(clientSocketMessage);
-                logging.ConditionalLog(
-                  $"task received from client\nTask: {socketMessage.task}, Argument: {socketMessage.argument}",
-                  LogImportance.Normal, LogStyle.Log
+                logger.ConditionalLog(
+                  $"taskID received from client\nTask: {socketMessage.taskID}, Argument: {socketMessage.argument}",
+                  LogImportance.Info, LogStyle.Log
                 );
 
                 string methodOutput;
@@ -119,7 +119,7 @@ namespace SmartAssistant.Core
       }
       catch (SocketException socketException)
       {
-        logging.ConditionalLog(
+        logger.ConditionalLog(
           "SocketException " + socketException.ToString(),
           LogImportance.Crucial, LogStyle.Warning
         );
@@ -145,14 +145,14 @@ namespace SmartAssistant.Core
           byte[] serverSocketMessageAsByteArray = Encoding.ASCII.GetBytes(serverSocketMessage);
           // Write byte array to socketConnection stream.
           stream.Write(serverSocketMessageAsByteArray, 0, serverSocketMessageAsByteArray.Length);
-          logging.ConditionalLog(
+          logger.ConditionalLog(
             "Server sent his SocketMessage - should be received by client",
-            LogImportance.Normal, LogStyle.Log);
+            LogImportance.Info, LogStyle.Log);
         }
       }
       catch (SocketException socketException)
       {
-        logging.ConditionalLog(
+        logger.ConditionalLog(
           "SocketException " + socketException.ToString(),
           LogImportance.Crucial, LogStyle.Warning
         );
@@ -161,61 +161,62 @@ namespace SmartAssistant.Core
 
     #region Socket Message Execution
     /// <summary>
-    /// Executes task based on socket message
+    /// Executes taskID based on socket message
     /// </summary>
     /// <param name="socketMessage">socket message</param>
-    /// <param name="methodOutput">output of the task carried</param>
+    /// <param name="methodOutput">output of the taskID carried</param>
     private void ExecuteSocketTask(SocketMessage socketMessage, out string methodOutput)
     {
       methodOutput = null;
       // bunch of returns to avoid errors
       if (socketMessage.taskType > maxTaskType)
       {
-        logging.ConditionalLog(
-          $"taskType recieved from client: {socketMessage.taskType} exceeds the number of task types: {maxTaskType}",
+        logger.ConditionalLog(
+          $"taskType recieved from client: {socketMessage.taskType} exceeds the number of taskID types: {maxTaskType}",
           LogImportance.Critical, LogStyle.Error);
         return;
       }
 
       if (socketMessage.taskType > 0 && socketMessage.argument == null)
       {
-        logging.ConditionalLog(
+        logger.ConditionalLog(
           $"argument recieved from client is null but is required for taskType: {socketMessage.taskType}",
           LogImportance.Critical, LogStyle.Error);
         return;
       }
 
+      // execute taskID based on taskType and taskID
       switch(socketMessage.taskType)
       {
         case 0:
-          if (CheckTaskViability(socketMessage.task, socketActions.Length))
-            socketActions[socketMessage.task].Invoke();
+          if (CheckTaskViability(socketMessage.taskID, socketActions.Length))
+            socketActions[socketMessage.taskID].Invoke();
           return;
 
         case 1:
-          if (CheckTaskViability(socketMessage.task, socketInputActions.Length))
-            socketInputActions[socketMessage.task].Invoke(socketMessage.argument);
+          if (CheckTaskViability(socketMessage.taskID, socketInputActions.Length))
+            socketInputActions[socketMessage.taskID].Invoke(socketMessage.argument);
           return;
 
         case 2:
-          if (CheckTaskViability(socketMessage.task, socketFuncs.Length))
-            methodOutput = socketFuncs[socketMessage.task].Invoke(socketMessage.argument);
+          if (CheckTaskViability(socketMessage.taskID, socketFuncs.Length))
+            methodOutput = socketFuncs[socketMessage.taskID].Invoke(socketMessage.argument);
           return;
       }
     }
 
     /// <summary>
-    /// Checks if task index is within range of maximum task available
+    /// Checks if taskID index is within range of maximum taskID available
     /// </summary>
-    /// <param name="task">task index called</param>
-    /// <param name="maxTask">maximum number of task available</param>
-    /// <returns>Returns true if task index is not more than the available number of task else false</returns>
-    private bool CheckTaskViability(in int task, in int maxTask)
+    /// <param name="taskID">taskID index called</param>
+    /// <param name="maxTasks">maximum number of taskID available</param>
+    /// <returns>Returns true if taskID index is not more than the available number of taskID else false</returns>
+    private bool CheckTaskViability(in int taskID, in int maxTasks)
     {
-      if (task > maxTask)
+      if (taskID > maxTasks)
       {
-        logging.ConditionalLog(
-        $"task recieved from client: {task} exceeds the number of tasks: {maxTask}",
+        logger.ConditionalLog(
+        $"taskID recieved from client: {taskID} exceeds the number of tasks: {maxTasks}",
         LogImportance.Critical, LogStyle.Error);
         return false;
       }

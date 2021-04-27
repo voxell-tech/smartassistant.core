@@ -22,7 +22,7 @@ namespace SmartAssistant
   public struct SocketMessage
   {
     public int taskType;
-    public int task;
+    public int taskID;
     public string argument;
   }
 }

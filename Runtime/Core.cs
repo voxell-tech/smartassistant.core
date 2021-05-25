@@ -13,12 +13,10 @@ You should have received a copy of the GNU General Public License
 along with this program; if not, write to the Free Software Foundation,
 Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
 
-The Original Code is Copyright (C) 2020 Voxell Technologies.
+The Original Code is Copyright (C) 2020 Voxell Technologies and Contributors.
 All rights reserved.
 */
 
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Core : MonoBehaviour

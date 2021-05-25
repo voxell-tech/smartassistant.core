@@ -129,13 +129,24 @@ namespace SmartAssistant
     public static uint Morton3D(Vector3 point) => Morton3D(point.x, point.y, point.z);
 
     /// <summary>
-    /// Create a random vector based on a range
+    /// Create a random vector based on the given range
     /// </summary>
     public static Vector3 RandomVector(float minCoor, float maxCoor)
     {
       float x = UnityEngine.Random.Range(minCoor, maxCoor);
       float y = UnityEngine.Random.Range(minCoor, maxCoor);
       float z = UnityEngine.Random.Range(minCoor, maxCoor);
+      return new Vector3(x, y, z);
+    }
+
+    /// <summary>
+    /// Create a random vector based on the given range
+    /// </summary>
+    public static Vector3 RandomVector(Vector3 minCoor, Vector3 maxCoor)
+    {
+      float x = UnityEngine.Random.Range(minCoor.x, maxCoor.x);
+      float y = UnityEngine.Random.Range(minCoor.y, maxCoor.y);
+      float z = UnityEngine.Random.Range(minCoor.z, maxCoor.z);
       return new Vector3(x, y, z);
     }
 
@@ -159,11 +170,9 @@ namespace SmartAssistant
     /// <summary>
     /// Create a copy of native array from a reference normal array
     /// </summary>
-    public static NativeArray<T> CopyToNativeArray<T>(ref T[] array, Allocator allocator) where T : struct
+    public static void CopyToNativeArray<T>(ref T[] array, ref NativeArray<T> nativeArray) where T : struct
     {
-      NativeArray<T> outNativeArray = new NativeArray<T>(array.Length, allocator);
-      for (int i=0; i < array.Length; i++) outNativeArray[i] = array[i];
-      return outNativeArray;
+      for (int i=0; i < array.Length; i++) nativeArray[i] = array[i];
     }
   }
 }

@@ -22,8 +22,8 @@ using UnityEngine;
 
 namespace SmartAssistant.Core.Inspector
 {
-  [CustomPropertyDrawer(typeof(ReadOnlyAttribute))]
-  public class ReadOnlyAttributeDrawer : PropertyDrawer
+  [CustomPropertyDrawer(typeof(InspectOnlyAttribute))]
+  public class InspectOnlyDrawer : PropertyDrawer
   {
     public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
     {
@@ -34,48 +34,55 @@ namespace SmartAssistant.Core.Inspector
   }
 
   [CustomPropertyDrawer(typeof(SceneAttribute))]
-  public class SceneAttributeDrawer : PropertyDrawer
+  public class SceneDrawer : PropertyDrawer
   {
-    private SceneAsset newScene;
-    private SceneAsset oldScene;
-
-    public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
+    public override void OnGUI (Rect position, SerializedProperty property, GUIContent label)
     {
-      if (oldScene == null)
+      if (property.propertyType == SerializedPropertyType.String)
       {
-        if (property.stringValue != "")
+        SceneAsset sceneObject = GetSceneObject(property.stringValue);
+        SceneAsset scene = EditorGUI.ObjectField(position, label, sceneObject, typeof(SceneAsset), true) as SceneAsset;
+        if (scene == null)
         {
-          string[] paths = AssetDatabase.FindAssets(property.stringValue);
-          if (paths.Length > 0)
-          {
-            for (int p=0; p < paths.Length; p++)
-            {
-              string path = AssetDatabase.GUIDToAssetPath(paths[p]);
-              SceneAsset searchScene = AssetDatabase.LoadAssetAtPath<SceneAsset>(path);
-              if (searchScene != null && searchScene.name == property.stringValue) oldScene = searchScene;
-            }
-          }
+          property.stringValue = "";
+        } else if (scene.name != property.stringValue)
+        {
+          SceneAsset sceneObj = GetSceneObject(scene.name);
+          if (sceneObj == null)
+              Debug.LogWarning("The scene " + scene.name + " cannot be used. To use this scene add it to the build settings for the project");
+          else property.stringValue = scene.name;
         }
       }
+      else EditorGUI.LabelField (position, label.text, "Use [Scene] with strings.");
+    }
+    protected SceneAsset GetSceneObject(string sceneObjectName)
+    {
+      if (string.IsNullOrEmpty(sceneObjectName)) return null;
 
-      newScene = EditorGUI.ObjectField(position, label, oldScene, typeof(SceneAsset), false) as SceneAsset;
-      oldScene = newScene;
-      if (newScene != null)
+      foreach (EditorBuildSettingsScene editorScene in EditorBuildSettings.scenes)
       {
-        property.stringValue = newScene.name;
-      } else property.stringValue = "";
+        if (editorScene.path.IndexOf(sceneObjectName) != -1)
+          return AssetDatabase.LoadAssetAtPath<SceneAsset>(editorScene.path);
+      }
+      Debug.LogWarning("Scene [" + sceneObjectName + "] cannot be used. Add this scene to the 'Scenes in the Build' in build settings.");
+      return null;
     }
   }
 
   [CustomPropertyDrawer(typeof(ButtonAttribute))]
-  public class ButtonAttributeDrawer : DecoratorDrawer
+  public class ButtonDrawer : PropertyDrawer
   {
-    public override void OnGUI(Rect position)
+    public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
     {
       if (GUI.Button(position, "Test"))
       {
         Debug.Log("Button Pressed");
       }
+    }
+
+    public override float GetPropertyHeight(SerializedProperty property, GUIContent label)
+    {
+      return 16f;
     }
   }
 }

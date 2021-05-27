@@ -18,21 +18,16 @@ All rights reserved.
 */
 
 using UnityEngine;
-using System;
+using UnityEditor;
+using System.Collections.Generic;
 
 namespace SmartAssistant.Core.Inspector
 {
-  public class ReadOnlyAttribute : PropertyAttribute
-  {
-    public ReadOnlyAttribute() {}
-  }
+  public class InspectOnlyAttribute : PropertyAttribute {}
 
-  public class SceneAttribute : PropertyAttribute
-  {
-    public SceneAttribute() {}
-  }
+  public class SceneAttribute : PropertyAttribute {}
 
-  public class ButtonAttribute : Attribute
+  public class ButtonAttribute : GUITargetAttribute
   {
     public ButtonAttribute(string buttonName="") {}
   }

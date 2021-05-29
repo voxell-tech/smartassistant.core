@@ -17,7 +17,7 @@ The Original Code is Copyright (C) 2020 Voxell Technologies.
 All rights reserved.
 */
 
-namespace SmartAssistant
+namespace SmartAssistant.Core
 {
   public struct SocketMessage
   {

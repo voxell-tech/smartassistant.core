@@ -34,10 +34,8 @@ namespace SmartAssistant.Core
     [Header("Socket Settings")]
     public string ipAddress = "localhost";
     public int port = 8052;
-    public LogImportance debugLevel;
-
     public readonly int headerSize = 10;
-    private Logging logger;
+    public Logging logger;
     #endregion
 
     #region TCP Connections
@@ -59,8 +57,6 @@ namespace SmartAssistant.Core
       tcpListenerThread = new Thread (new ThreadStart(SocketListen));
       tcpListenerThread.IsBackground = true;
       tcpListenerThread.Start();
-
-      logger = new Logging(debugLevel);
     }
 
     void OnDisable()

@@ -34,7 +34,7 @@ namespace SmartAssistant
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static int CalculateSplit(int totalSize, int splitSize) => (totalSize + splitSize - 1) / splitSize;
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static int CalculateGrids(uint totalThreads, uint grpSize) => (int)((totalThreads + grpSize - 1) / grpSize);
+    public static int CalculateSplit(uint totalThreads, uint grpSize) => (int)((totalThreads + grpSize - 1) / grpSize);
 
     public static void SetArray<T>(ref T[] array, T value)
     { for (int i=0; i < array.Length; i++) array[i] = value; }

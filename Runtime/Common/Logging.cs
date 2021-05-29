@@ -36,6 +36,7 @@ namespace SmartAssistant
     Critical
   }
 
+  [System.Serializable]
   public class Logging
   {
     public LogImportance debugLevel;

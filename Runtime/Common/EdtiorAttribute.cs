@@ -18,8 +18,7 @@ All rights reserved.
 */
 
 using UnityEngine;
-using UnityEditor;
-using System.Collections.Generic;
+using System;
 
 namespace SmartAssistant.Core.Inspector
 {
@@ -27,8 +26,10 @@ namespace SmartAssistant.Core.Inspector
 
   public class SceneAttribute : PropertyAttribute {}
 
-  public class ButtonAttribute : GUITargetAttribute
+  [AttributeUsage(AttributeTargets.Method, AllowMultiple = false, Inherited = false)]
+  public class ButtonAttribute : Attribute
   {
-    public ButtonAttribute(string buttonName="") {}
+    public string buttonName { get; private set; }
+    public ButtonAttribute(string buttonName="") => this.buttonName = buttonName;
   }
 }

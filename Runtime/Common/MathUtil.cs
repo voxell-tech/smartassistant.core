@@ -23,7 +23,7 @@ using Unity.Collections;
 
 namespace SmartAssistant
 {
-  public static class MathUtils
+  public static class MathUtil
   {
     /// <summary>
     /// Calculate the least amount of split from the total size given a split size

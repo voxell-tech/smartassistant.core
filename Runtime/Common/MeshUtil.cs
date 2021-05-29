@@ -23,7 +23,7 @@ using Unity.Mathematics;
 
 namespace SmartAssistant
 {
-  public static class MeshUtils
+  public static class MeshUtil
   {
     /// <summary>
     /// creates a deep copy of the mesh

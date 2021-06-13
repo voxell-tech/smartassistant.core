@@ -49,9 +49,7 @@ namespace SmartAssistant.Core.Inspector
         EditorGUILayout.Space();
 
         foreach (var method in _methods)
-        {
           CustomEditorGUI.MethodButton(serializedObject.targetObject, method);
-        }
       }
     }
   }

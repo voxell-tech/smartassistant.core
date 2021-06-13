@@ -26,7 +26,7 @@ namespace SmartAssistant
   public static class MeshUtil
   {
     /// <summary>
-    /// creates a deep copy of the mesh
+    /// Creates a deep copy of a mesh
     /// </summary>
     /// <param name="originMesh">source of mesh to copy from</param>
     /// <param name="newMesh">location of copied mesh</param>
@@ -42,7 +42,7 @@ namespace SmartAssistant
     }
 
     /// <summary>
-    /// get native array of mesh vertices
+    /// Get native array of mesh vertices
     /// </summary>
     /// <param name="meshData">mesh data</param>
     /// <param name="allocator">allocation type</param>
@@ -56,7 +56,7 @@ namespace SmartAssistant
     }
 
     /// <summary>
-    /// get native array of mesh normals
+    /// Get native array of mesh normals
     /// </summary>
     /// <param name="meshData">mesh data</param>
     /// <param name="allocator">allocation type</param>
@@ -70,7 +70,7 @@ namespace SmartAssistant
     }
     
     /// <summary>
-    /// get native array of triangle indices
+    /// Get native array of triangle indices
     /// </summary>
     /// /// <param name="meshData">mesh data</param>
     /// <param name="allocator">allocation type</param>

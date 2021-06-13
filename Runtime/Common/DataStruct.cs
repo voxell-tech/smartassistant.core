@@ -16,8 +16,9 @@ Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
 The Original Code is Copyright (C) 2020 Voxell Technologies.
 All rights reserved.
 */
+using UnityEngine;
 
-namespace SmartAssistant.Core
+namespace SmartAssistant
 {
   public struct SocketMessage
   {

@@ -32,9 +32,9 @@ namespace SmartAssistant
     /// <param name="splitSize">maximum size of each divisions after the split</param>
     /// <returns></returns>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static int CalculateSplit(int totalSize, int splitSize) => (totalSize + splitSize - 1) / splitSize;
+    public static int CalculateGrids(int totalSize, int splitSize) => (totalSize + splitSize - 1) / splitSize;
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static int CalculateSplit(uint totalThreads, uint grpSize) => (int)((totalThreads + grpSize - 1) / grpSize);
+    public static int CalculateGrids(uint totalThreads, uint grpSize) => (int)((totalThreads + grpSize - 1) / grpSize);
 
     public static void SetArray<T>(ref T[] array, T value)
     { for (int i=0; i < array.Length; i++) array[i] = value; }
@@ -150,6 +150,10 @@ namespace SmartAssistant
       return new Vector3(x, y, z);
     }
 
+    /// <summary>
+    /// Count leading zeros of a 32 bit unsigned integer
+    /// </summary>
+    /// <param name="x">unsigned integer input</param>
     public static uint __clz(uint x)
     {
       //do the smearing

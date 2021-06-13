@@ -220,4 +220,11 @@ namespace SmartAssistant.Core
     }
     #endregion
   }
+
+  public struct SocketMessage
+  {
+    public int taskType;
+    public int taskID;
+    public string argument;
+  }
 }

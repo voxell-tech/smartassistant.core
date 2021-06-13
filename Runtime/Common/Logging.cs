@@ -41,11 +41,14 @@ namespace SmartAssistant
   {
     public LogImportance debugLevel;
 
-    public Logging(LogImportance debugLevel)
-    {
-      this.debugLevel = debugLevel;
-    }
+    public Logging(LogImportance debugLevel) => this.debugLevel = debugLevel;
 
+    /// <summary>
+    /// Conditionally log message based on LogImportance and LogStyle
+    /// </summary>
+    /// <param name="message">message to log</param>
+    /// <param name="importance">importance level of the message</param>
+    /// <param name="logStyle">style of logging</param>
     public void ConditionalLog(object message, LogImportance importance, LogStyle logStyle)
     {
       if (importance >= debugLevel)

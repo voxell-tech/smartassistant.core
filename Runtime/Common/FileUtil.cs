@@ -21,7 +21,7 @@ using System.IO;
 using UnityEngine;
 using UnityEngine.Networking;
 
-namespace SmartAssistant.Speech
+namespace SmartAssistant
 {
   public static class FileUtil
   {
@@ -30,7 +30,7 @@ namespace SmartAssistant.Speech
     /// </summary>
     /// <param name="path">file path starting from and excluding Application.streamingAssetsPath</param>
     /// <returns>raw bytes from the file</returns>
-    public static byte[] LoadFile(string path)
+    public static byte[] LoadStreamingAssetFile(string path)
     {
       if (!IsPathRooted(path))
       {
@@ -53,9 +53,9 @@ namespace SmartAssistant.Speech
     /// <summary>
     /// Read the file and return raw string from the file
     /// </summary>
-    /// <param name="path">file path starting from and excluding Application.streamingAssetsPath</param>
+    /// <param name="path">file path starting excluding Application.streamingAssetsPath</param>
     /// <returns>raw string from the file</returns>
-    public static string ReadFile(string path)
+    public static string ReadStreamingAssetFile(string path)
     {
       if (!IsPathRooted(path))
       {

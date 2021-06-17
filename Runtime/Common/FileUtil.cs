@@ -19,7 +19,6 @@ All rights reserved.
 
 using System.IO;
 using UnityEngine;
-using UnityEngine.Networking;
 
 namespace SmartAssistant
 {
@@ -33,21 +32,9 @@ namespace SmartAssistant
     public static byte[] LoadStreamingAssetFile(string path)
     {
       if (!IsPathRooted(path))
-      {
         path = Path.Combine(Application.streamingAssetsPath, path);
-      }
 
-      if (Application.platform != RuntimePlatform.Android)
-      {
-        path = "file://" + path;
-      }
-
-      UnityWebRequest request = UnityWebRequest.Get(path);
-      request.SendWebRequest();
-      while (!request.isDone)
-      {
-      }
-      return request.downloadHandler.data;
+      return File.ReadAllBytes(path);
     }
 
     /// <summary>
@@ -58,9 +45,7 @@ namespace SmartAssistant
     public static string ReadStreamingAssetFile(string path)
     {
       if (!IsPathRooted(path))
-      {
         path = Path.Combine(Application.streamingAssetsPath, path);
-      }
 
       return File.ReadAllText(path);
     }

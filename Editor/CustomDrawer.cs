@@ -69,21 +69,4 @@ namespace SmartAssistant.Core.Inspector
       return null;
     }
   }
-
-  [CustomPropertyDrawer(typeof(ButtonAttribute))]
-  public class ButtonDrawer : PropertyDrawer
-  {
-    public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
-    {
-      if (GUI.Button(position, "Test"))
-      {
-        Debug.Log("Button Pressed");
-      }
-    }
-
-    public override float GetPropertyHeight(SerializedProperty property, GUIContent label)
-    {
-      return 16f;
-    }
-  }
 }

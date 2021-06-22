@@ -1,16 +1,16 @@
 {
-  "name": "smartassistant.voxell.core",
-  "displayName": "SA Core",
+  "name": "voxell.util",
+  "displayName": "VX Util",
   "author": "Nixon",
-  "description": "Core of Smart Assistant",
+  "description": "Unity Utilities",
   "keywords": [
-    "core",
-    "smart assistant"
+    "util",
+    "voxell"
   ],
   "license": "GPL v3.0",
   "unity": "2020.2",
   "unityRelease": "0f1",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "dependencies": {
     "com.unity.jobs": ""
   }

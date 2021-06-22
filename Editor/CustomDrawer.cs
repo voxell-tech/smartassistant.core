@@ -25,10 +25,10 @@ namespace SmartAssistant.Core.Inspector
   [CustomPropertyDrawer(typeof(InspectOnlyAttribute))]
   public class InspectOnlyDrawer : PropertyDrawer
   {
-    public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
+    public override void OnGUI(Rect rect, SerializedProperty property, GUIContent label)
     {
       GUI.enabled = false;
-      EditorGUI.PropertyField(position, property, label, true);
+      EditorGUI.PropertyField(rect, property, label, true);
       GUI.enabled = true;
     }
   }
@@ -36,12 +36,12 @@ namespace SmartAssistant.Core.Inspector
   [CustomPropertyDrawer(typeof(SceneAttribute))]
   public class SceneDrawer : PropertyDrawer
   {
-    public override void OnGUI (Rect position, SerializedProperty property, GUIContent label)
+    public override void OnGUI (Rect rect, SerializedProperty property, GUIContent label)
     {
       if (property.propertyType == SerializedPropertyType.String)
       {
         SceneAsset sceneObject = GetSceneObject(property.stringValue);
-        SceneAsset scene = EditorGUI.ObjectField(position, label, sceneObject, typeof(SceneAsset), true) as SceneAsset;
+        SceneAsset scene = EditorGUI.ObjectField(rect, label, sceneObject, typeof(SceneAsset), true) as SceneAsset;
         if (scene == null)
         {
           property.stringValue = "";
@@ -53,7 +53,7 @@ namespace SmartAssistant.Core.Inspector
           else property.stringValue = scene.name;
         }
       }
-      else EditorGUI.LabelField (position, label.text, "Use [Scene] with strings.");
+      else EditorGUI.LabelField (rect, label.text, "Use [Scene] with strings.");
     }
 
     protected SceneAsset GetSceneObject(string sceneObjectName)

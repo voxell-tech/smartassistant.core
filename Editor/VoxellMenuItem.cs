@@ -18,11 +18,9 @@ All rights reserved.
 */
 
 using UnityEditor;
-using UnityEngine;
 using System.Reflection;
-using System.IO;
 
-namespace SmartAssistant
+namespace Voxell.Util
 {
   public static class CustomMenuItem
   {
@@ -33,25 +31,6 @@ namespace SmartAssistant
       System.Type type = assembly.GetType("UnityEditor.LogEntries");
       MethodInfo method = type.GetMethod("Clear");
       method.Invoke(new object(), null);
-    }
-
-    [MenuItem("Assets/Create/Python Script", false, 80)]
-    public static void CreatePlainTextFile()
-    {
-      string copyPath = Resources.Load<PythonAsset>("python_script").filePath;
-      string copyContent = File.ReadAllText(copyPath);
-      string projectWindowPath = AssetDatabase.GetAssetPath(Selection.activeObject);
-      string targetPath = $"{projectWindowPath}/python_script.py";
-
-      int count = 1;
-      while (File.Exists(targetPath))
-      {
-        targetPath = $"{projectWindowPath}/python_script_{count}.py";
-        count += 1;
-      }
-
-      File.Copy(copyPath, targetPath);
-      AssetDatabase.Refresh();
     }
   }
 }

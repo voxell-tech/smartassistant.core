@@ -21,7 +21,7 @@ using UnityEngine;
 using Unity.Collections;
 using Unity.Mathematics;
 
-namespace SmartAssistant
+namespace Voxell
 {
   public static class MeshUtil
   {

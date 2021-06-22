@@ -6,7 +6,7 @@ using System.Linq;
 using System.Reflection;
 using UnityEngine;
 
-namespace SmartAssistant.Core.Inspector
+namespace Voxell.Inspector
 {
   public static class CustomEditorUtil
   {

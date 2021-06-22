@@ -20,7 +20,7 @@ All rights reserved.
 using UnityEditor;
 using UnityEngine;
 
-namespace SmartAssistant.Core.Inspector
+namespace Voxell.Inspector
 {
   [CustomPropertyDrawer(typeof(InspectOnlyAttribute))]
   public class InspectOnlyDrawer : PropertyDrawer

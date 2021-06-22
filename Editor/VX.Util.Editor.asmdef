@@ -1,10 +1,12 @@
 {
-    "name": "SmartAssistant.Core.Runtime",
+    "name": "VX.Util.Editor",
     "rootNamespace": "",
     "references": [
-        "GUID:d8b63aba1907145bea998dd612889d6b"
+        "GUID:b23efe0d0bd83184681bd63517e3c327"
     ],
-    "includePlatforms": [],
+    "includePlatforms": [
+        "Editor"
+    ],
     "excludePlatforms": [],
     "allowUnsafeCode": false,
     "overrideReferences": false,

@@ -25,7 +25,7 @@ using System.Collections;
 using System.Linq;
 using System.Reflection;
 
-namespace SmartAssistant.Core.Inspector
+namespace Voxell.Inspector
 {
   public static class CustomEditorGUI
   {

@@ -9,7 +9,7 @@ This package is where all the utility functions as well as all the custom inspec
 ### A simple example:
 ```cs
 using UnityEngine;
-using SmartAssistant.Core.Inspector;
+using Voxell.Core.Inspector;
 
 public class CustomInspectorTest : MonoBehaviour
 {
@@ -34,7 +34,7 @@ public class CustomInspectorTest : MonoBehaviour
 ### A simple example for MathUtil:
 
 ```cs
-using SmartAssistant;
+using Voxell;
 
 Vector3 vec1 = new Vector3(0.1f, 0.5f, 0.9f);
 Vector3 vec2 = new Vector3(2.0, 0.1f, 1.0f);
@@ -53,7 +53,7 @@ maxVec.z = Mathf.Max(vec1.z, vec2.z);
 
 ### A simple example:
 ```cs
-using SmartAssistant;
+using Voxell;
 
 public class LoggingTest : MonoBehaviour
 {
@@ -76,9 +76,7 @@ This package requires the Unity.Mathematics package in order to work.
 
 ## Support the project!
 
-This project is part of the [Smart Assistant](https://github.com/voxell-tech/SmartAssistant) project. If you feel like supporting the development of this project, simply click the "Sponsor" button on this page or support us on [Patreon](https://www.patreon.com/smartassistant)! Thank you!
-
-<a href="https://www.patreon.com/smartassistant" target="_blank">
+<a href="https://www.patreon.com/voxelltech" target="_blank">
   <img src="https://teaprincesschronicles.files.wordpress.com/2020/03/support-me-on-patreon.png" alt="patreon" width="200px" height="55px"/>
 </a>
 

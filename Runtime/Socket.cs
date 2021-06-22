@@ -26,7 +26,7 @@ using System.Threading;
 
 using Newtonsoft.Json;
 
-namespace SmartAssistant.Core
+namespace Voxell.Core
 {
   public class Socket : MonoBehaviour
   {

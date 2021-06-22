@@ -20,7 +20,7 @@ All rights reserved.
 using UnityEngine;
 using System;
 
-namespace SmartAssistant.Core.Inspector
+namespace Voxell.Inspector
 {
   public class InspectOnlyAttribute : PropertyAttribute {}
 

@@ -19,7 +19,7 @@ All rights reserved.
 
 using UnityEngine;
 
-namespace SmartAssistant
+namespace Voxell
 {
   public enum LogStyle
   {

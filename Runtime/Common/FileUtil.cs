@@ -20,7 +20,7 @@ All rights reserved.
 using System.IO;
 using UnityEngine;
 
-namespace SmartAssistant
+namespace Voxell
 {
   public static class FileUtil
   {

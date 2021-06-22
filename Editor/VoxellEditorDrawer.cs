@@ -22,7 +22,7 @@ using System.Linq;
 using System.Reflection;
 using UnityEditor;
 
-namespace SmartAssistant.Core.Inspector
+namespace Voxell.Inspector
 {
   [CanEditMultipleObjects]
   [CustomEditor(typeof(UnityEngine.Object), true)]

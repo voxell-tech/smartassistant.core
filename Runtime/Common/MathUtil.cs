@@ -21,7 +21,7 @@ using System.Runtime.CompilerServices;
 using UnityEngine;
 using Unity.Collections;
 
-namespace SmartAssistant
+namespace Voxell
 {
   public static class MathUtil
   {

@@ -18,7 +18,6 @@ All rights reserved.
 */
 
 using System.Runtime.CompilerServices;
-using UnityEngine;
 using Unity.Collections;
 
 namespace Voxell.Mathx
@@ -82,6 +81,11 @@ namespace Voxell.Mathx
     /// Create a copy of native array from a reference normal array
     /// </summary>
     public static void CopyToNativeArray<T>(ref T[] array, ref NativeArray<T> nativeArray) where T : struct
+    {
+      for (int i=0; i < array.Length; i++) nativeArray[i] = array[i];
+    }
+
+    public static void CopyToNativeArray<T>(T[] array, ref NativeArray<T> nativeArray) where T : struct
     {
       for (int i=0; i < array.Length; i++) nativeArray[i] = array[i];
     }

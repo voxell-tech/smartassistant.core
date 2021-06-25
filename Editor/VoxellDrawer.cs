@@ -28,9 +28,12 @@ namespace Voxell.Inspector
     public override void OnGUI(Rect rect, SerializedProperty property, GUIContent label)
     {
       GUI.enabled = false;
-      EditorGUI.PropertyField(rect, property, label, true);
+      EditorGUILayout.PropertyField(property, new GUIContent(ObjectNames.NicifyVariableName(property.name)));
       GUI.enabled = true;
     }
+
+    public override float GetPropertyHeight(SerializedProperty property, GUIContent label) => 0;
+
   }
 
   [CustomPropertyDrawer(typeof(SceneAttribute))]

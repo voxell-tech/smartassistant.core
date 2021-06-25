@@ -19,7 +19,6 @@ All rights reserved.
 
 using System.Runtime.CompilerServices;
 using UnityEngine;
-using Unity.Collections;
 
 namespace Voxell.Mathx
 {

@@ -1,4 +1,4 @@
-# Core of Smart Assistant
+# Unity Utilities
 
 ## What does this package contains??
 
@@ -86,6 +86,6 @@ This package requires the Unity.Mathematics package in order to work.
 
 ## License
 
-Smart Assistant as a whole is licensed under the GNU Public License, Version 3. Individual files may have a different, but compatible license.
+This repository as a whole is licensed under the GNU Public License, Version 3. Individual files may have a different, but compatible license.
 
 See [license file](./LICENSE) for details.

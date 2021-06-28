@@ -24,6 +24,9 @@ namespace Voxell
 {
   public static class FileUtil
   {
+    public static string projectPath
+    { get => Application.dataPath.Substring(0, Application.dataPath.Length-6); }
+
     /// <summary>
     /// Read the file and return raw bytes from the file
     /// </summary>
@@ -58,5 +61,6 @@ namespace Voxell
       }
       return Path.IsPathRooted(path);
     }
+
   }
 }

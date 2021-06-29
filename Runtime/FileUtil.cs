@@ -40,16 +40,26 @@ namespace Voxell
       return folder;
     }
 
+    public static byte[] ReadAssetFileByte(VoxellAsset voxellAsset)
+    {
+      string path = Path.Combine(projectPath, voxellAsset.filePath);
+      return File.ReadAllBytes(path);
+    }
+
+    public static string ReadAssetFileText(VoxellAsset voxellAsset)
+    {
+      string path = Path.Combine(projectPath, voxellAsset.filePath);
+      return File.ReadAllText(path);
+    }
+
     /// <summary>
     /// Read the file and return raw bytes from the file
     /// </summary>
     /// <param name="path">file path starting from and excluding Application.streamingAssetsPath</param>
     /// <returns>raw bytes from the file</returns>
-    public static byte[] LoadStreamingAssetFile(string path)
+    public static byte[] ReadStreamingAssetFileByte(string path)
     {
-      if (!IsPathRooted(path))
-        path = Path.Combine(Application.streamingAssetsPath, path);
-
+      path = Path.Combine(Application.streamingAssetsPath, path);
       return File.ReadAllBytes(path);
     }
 
@@ -58,21 +68,10 @@ namespace Voxell
     /// </summary>
     /// <param name="path">file path starting excluding Application.streamingAssetsPath</param>
     /// <returns>raw string from the file</returns>
-    public static string ReadStreamingAssetFile(string path)
+    public static string ReadStreamingAssetFileText(string path)
     {
-      if (!IsPathRooted(path))
-        path = Path.Combine(Application.streamingAssetsPath, path);
-
+      path = Path.Combine(Application.streamingAssetsPath, path);
       return File.ReadAllText(path);
-    }
-
-    static bool IsPathRooted(string path)
-    {
-      if (path.StartsWith("jar:file:"))
-      {
-        return true;
-      }
-      return Path.IsPathRooted(path);
     }
 
   }

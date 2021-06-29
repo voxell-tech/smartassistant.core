@@ -28,6 +28,19 @@ namespace Voxell
     { get => Application.dataPath.Substring(0, Application.dataPath.Length-6); }
 
     /// <summary>
+    /// Get the path of the folder given a file path
+    /// </summary>
+    /// <param name="filePath">full file path</param>
+    /// <returns></returns>
+    public static string GetFolderPath(string filePath)
+    {
+      string folder = "";
+      string[] paths = filePath.Split(new char[]{'/', '\\'});
+      for (int p=0; p < paths.Length-1; p++) folder += paths[p] + '/';
+      return folder;
+    }
+
+    /// <summary>
     /// Read the file and return raw bytes from the file
     /// </summary>
     /// <param name="path">file path starting from and excluding Application.streamingAssetsPath</param>

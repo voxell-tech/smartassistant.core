@@ -28,10 +28,10 @@ namespace Voxell
     { get => Application.dataPath.Substring(0, Application.dataPath.Length-6); }
 
     /// <summary>
-    /// Get the path of the folder given a file path
+    /// Get the path of the folder given a file path by excluding the filename
     /// </summary>
     /// <param name="filePath">full file path</param>
-    /// <returns></returns>
+    /// <returns>Folder path of the file</returns>
     public static string GetFolderPath(string filePath)
     {
       string folder = "";
@@ -40,12 +40,34 @@ namespace Voxell
       return folder;
     }
 
+    /// <summary>
+    /// Get the path of the folder given a file path by excluding the filename
+    /// </summary>
+    /// <param name="filePath">full file path</param>
+    /// <param name="separator">separator of each folder in the filePath (default to '/' or '\\' if null is given)</param>
+    /// <returns>Folder path of the file</returns>
+    public static string GetFolderPath(string filePath, char[] separator)
+    {
+      string folder = "";
+      string[] paths = filePath.Split(separator);
+      for (int p=0; p < paths.Length-1; p++) folder += paths[p] + '/';
+      return folder;
+    }
+
+    /// <summary>
+    /// Read all the bytes of a given VoxellAsset
+    /// </summary>
+    /// <returns>Raw bytes from the file</returns>
     public static byte[] ReadAssetFileByte(VoxellAsset voxellAsset)
     {
       string path = Path.Combine(projectPath, voxellAsset.filePath);
       return File.ReadAllBytes(path);
     }
 
+    /// <summary>
+    /// Read all the string text of a given VoxellAsset
+    /// </summary>
+    /// <returns>Raw string from the file</returns>
     public static string ReadAssetFileText(VoxellAsset voxellAsset)
     {
       string path = Path.Combine(projectPath, voxellAsset.filePath);
@@ -56,7 +78,7 @@ namespace Voxell
     /// Read the file and return raw bytes from the file
     /// </summary>
     /// <param name="path">file path starting from and excluding Application.streamingAssetsPath</param>
-    /// <returns>raw bytes from the file</returns>
+    /// <returns>Raw bytes from the file</returns>
     public static byte[] ReadStreamingAssetFileByte(string path)
     {
       path = Path.Combine(Application.streamingAssetsPath, path);
@@ -67,7 +89,7 @@ namespace Voxell
     /// Read the file and return raw string from the file
     /// </summary>
     /// <param name="path">file path starting excluding Application.streamingAssetsPath</param>
-    /// <returns>raw string from the file</returns>
+    /// <returns>Raw string from the file</returns>
     public static string ReadStreamingAssetFileText(string path)
     {
       path = Path.Combine(Application.streamingAssetsPath, path);

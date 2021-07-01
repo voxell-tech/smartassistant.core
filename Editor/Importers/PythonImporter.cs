@@ -22,15 +22,19 @@ using UnityEditor.AssetImporters;
 
 namespace Voxell.PythonVX
 {
-  [ScriptedImporter(1, "py")]
+  [ScriptedImporter(3, "py")]
   public class PythonImporter : ScriptedImporter
   {
     public override void OnImportAsset(AssetImportContext ctx)
     {
       PythonAsset pythonAsset = ScriptableObject.CreateInstance<PythonAsset>();
       pythonAsset.filePath = ctx.assetPath;
+      TextAsset textAsset = new TextAsset(FileUtil.ReadAssetFileText(pythonAsset));
+      textAsset.name = FileUtil.GetFilename(pythonAsset.filePath);
+      pythonAsset.textAsset = textAsset;
       ctx.AddObjectToAsset("pythonAsset", pythonAsset, Resources.Load<Texture2D>("PythonLogo"));
       ctx.SetMainObject(pythonAsset);
+      ctx.AddObjectToAsset("textAsset", textAsset);
     }
   }
 }

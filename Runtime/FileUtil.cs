@@ -44,7 +44,7 @@ namespace Voxell
     /// Get the path of the folder given a file path by excluding the filename
     /// </summary>
     /// <param name="filePath">full file path</param>
-    /// <param name="separator">separator of each folder in the filePath (default to '/' or '\\' if null is given)</param>
+    /// <param name="separator">separator of each folder in the filePath</param>
     /// <returns>Folder path of the file</returns>
     public static string GetFolderPath(string filePath, char[] separator)
     {
@@ -52,6 +52,29 @@ namespace Voxell
       string[] paths = filePath.Split(separator);
       for (int p=0; p < paths.Length-1; p++) folder += paths[p] + '/';
       return folder;
+    }
+
+    /// <summary>
+    /// Get the name of the file given the file path by excluding all of its folder paths
+    /// </summary>
+    /// <param name="filePath">full file path</param>
+    /// <returns></returns>
+    public static string GetFilename(string filePath)
+    {
+      string[] paths = filePath.Split(new char[]{'/', '\\'});
+      return paths[paths.Length-1];
+    }
+
+    /// <summary>
+    /// Get the name of the file given the file path by excluding all of its folder paths
+    /// </summary>
+    /// <param name="filePath">full file path</param>
+    /// <param name="separator">separator of each folder in the filePath</param>
+    /// <returns></returns>
+    public static string GetFilename(string filePath, char[] separator)
+    {
+      string[] paths = filePath.Split(separator);
+      return paths[paths.Length-1];
     }
 
     /// <summary>

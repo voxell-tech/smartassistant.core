@@ -21,5 +21,8 @@ using UnityEngine;
 
 namespace Voxell.PythonVX
 {
-  public class PythonAsset : VoxellAsset {}
+  public class PythonAsset : VoxellAsset
+  {
+    public TextAsset textAsset;
+  }
 }

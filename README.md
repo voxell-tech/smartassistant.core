@@ -9,7 +9,7 @@ This package is where all the utility functions as well as all the custom inspec
 ### A simple example:
 ```cs
 using UnityEngine;
-using Voxell.Core.Inspector;
+using Voxell.Inspector;
 
 public class CustomInspectorTest : MonoBehaviour
 {
@@ -34,7 +34,8 @@ public class CustomInspectorTest : MonoBehaviour
 ### A simple example for MathUtil:
 
 ```cs
-using Voxell;
+using UnityEngine;
+using Voxell.Mathx;
 
 Vector3 vec1 = new Vector3(0.1f, 0.5f, 0.9f);
 Vector3 vec2 = new Vector3(2.0, 0.1f, 1.0f);
@@ -53,16 +54,17 @@ maxVec.z = Mathf.Max(vec1.z, vec2.z);
 
 ### A simple example:
 ```cs
+using UnityEngine;
 using Voxell;
 
 public class LoggingTest : MonoBehaviour
 {
-  public Logging logger;
+  public Logger logger;
 
-  public void NormalLog() => logger.ConditionalLog("NormalLog", LogImportance.Info, LogStyle.Log);
-  public void ImportantLog() => logger.ConditionalLog("ImportantLog", LogImportance.Important, LogStyle.Log);
-  public void CrucialWarning() => logger.ConditionalLog("CrucialWarning", LogImportance.Crucial, LogStyle.Warning);
-  public void CriticalError() => logger.ConditionalLog("CriticalError", LogImportance.Critical, LogStyle.Error);
+  public void NormalLog() => logger.ConditionalLog("NormalLog", LogImportance.Info, LogType.Log);
+  public void ImportantLog() => logger.ConditionalLog("ImportantLog", LogImportance.Important, LogType.Log);
+  public void CrucialWarning() => logger.ConditionalLog("CrucialWarning", LogImportance.Crucial, LogType.Warning);
+  public void CriticalError() => logger.ConditionalLog("CriticalError", LogImportance.Critical, LogType.Error);
 }
 ```
 

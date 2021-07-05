@@ -68,9 +68,9 @@ public class LoggingTest : MonoBehaviour
 
 ## How to use?
 
-This package requires the Unity.Mathematics package in order to work.
+This package requires the Burst Compiler package in order to work.
 
-1. Install Unity's Mathematics from the Package Manager.
+1. Install Unity's Burst Compiler from the Package Manager.
 2. Clone this repository into your project's Packages folder.
 3. And you are ready to go!
 

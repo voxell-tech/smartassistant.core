@@ -68,23 +68,30 @@ public class LoggingTest : MonoBehaviour
 }
 ```
 
-## How to use?
+## Installation
 
-This depends on the com.unity.mathematics package.
+This package depends on the com.unity.mathematics package.
 
-1. Install com.unity.mathematics from the Package Manager (or alternatively, you can just search for Burst and Install it).
+1. Install com.unity.mathematics from the Package Manager *(Optional: do this only if Unity complains, com.unity.mathematics comes with Unity by default)*.
 2. Clone this repository into your project's Packages folder.
 3. And you are ready to go!
 
 ## Support the project!
 
 <a href="https://www.patreon.com/voxelltech" target="_blank">
-  <img src="https://teaprincesschronicles.files.wordpress.com/2020/03/support-me-on-patreon.png" alt="patreon" width="200px" height="55px"/>
+  <img src="https://teaprincesschronicles.files.wordpress.com/2020/03/support-me-on-patreon.png" alt="patreon" width="200px" height="56px"/>
 </a>
 
 <a href ="https://ko-fi.com/voxelltech" target="_blank">
   <img src="https://uploads-ssl.webflow.com/5c14e387dab576fe667689cf/5cbed8a4cf61eceb26012821_SupportMe_red.png" alt="kofi" width="200px" height="40px"/>
 </a>
+
+## Join the community!
+
+<a href ="https://discord.gg/WDBnuNH" target="_blank">
+  <img src="https://gist.githubusercontent.com/nixon-voxell/e7ba303906080ffdf65b106f684801b5/raw/65b0338d5f4e82f700d3c9f14ec9fc62f3fd278e/JoinVXDiscord.svg" alt="discord" width="200px" height="200px"/>
+</a>
+
 
 ## License
 

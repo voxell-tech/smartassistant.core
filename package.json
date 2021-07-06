@@ -11,7 +11,5 @@
   "unity": "2019.4",
   "unityRelease": "0f1",
   "version": "1.1.1",
-  "dependencies": {
-    "com.unity.mathematics": "1.2.1"
-  }
+  "dependencies": {}
 }
